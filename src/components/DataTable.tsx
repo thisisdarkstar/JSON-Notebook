@@ -218,6 +218,7 @@ export default function DataTable() {
     getScrollElement: () => parentRef.current,
     estimateSize: () => ROW_HEIGHT,
     overscan: 10,
+    measureElement: (el) => el.getBoundingClientRect().height,
   })
 
   const totalWidth = colWidths.reduce((a, b) => a + b, 0)
@@ -276,17 +277,18 @@ export default function DataTable() {
               <div
                 key={virtualRow.index}
                 className="virtual-row"
+                data-index={virtualRow.index}
+                ref={virtualizer.measureElement}
                 style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   width: totalWidth,
-                  height: `${virtualRow.size}px`,
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
                 {columns.map((col, ci) => (
-                  <div key={col.id} className="virtual-cell" style={{ width: colWidths[ci] }}>
+                  <div key={col.id} className="virtual-cell" style={{ width: colWidths[ci], minHeight: ROW_HEIGHT }}>
                     <TableCell value={col.getValue(row)} field={col.id} />
                   </div>
                 ))}

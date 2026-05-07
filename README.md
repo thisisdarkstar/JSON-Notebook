@@ -1,40 +1,40 @@
 # JSON Notebook
 
-A modern, snappy JSON Web Notebook for inspecting, filtering, and exploring JSON data — like a spreadsheet for JSON files.
+A modern, snappy JSON Web Notebook for inspecting, filtering, and exploring JSON data - like a spreadsheet for JSON files.
 
 ## Features
 
 ### Import
-- **Drag & Drop** — drop a JSON file directly onto the page
-- **Upload File** — browse and select from your computer
-- **Paste JSON** — paste JSON via the modal dialog or `Ctrl+V` anywhere
+- **Drag & Drop** - drop a JSON file directly onto the page
+- **Upload File** - browse and select from your computer
+- **Paste JSON** - paste JSON via the modal dialog or `Ctrl+V` anywhere
 - Supports top-level arrays or objects containing array values
 
 ### Table View
-- **Virtualized rendering** — handles 10k+ rows smoothly (only ~30 rows in DOM)
-- **Column sorting** — click any header to cycle asc/desc/none
-- **Column filtering** — per-column text search with unique value picker
-- **Column resizing** — drag handles on column edges
-- **Column spread** — expand nested objects/arrays into separate columns
-- **Smart cell rendering** — URLs as links, numbers formatted, booleans colored, arrays as tags, nested objects as key-tags with `[n]` badge
-- **Click to copy** — click any cell value to copy to clipboard with toast notification
-- **Expandable modal** — view full JSON for any cell in a popup
+- **Virtualized rendering** - handles 10k+ rows smoothly (only ~30 rows in DOM)
+- **Column sorting** - click any header to cycle asc/desc/none
+- **Column filtering** - per-column text search with unique value picker
+- **Column resizing** - drag handles on column edges
+- **Column spread** - expand nested objects/arrays into separate columns
+- **Smart cell rendering** - URLs as links, numbers formatted, booleans colored, arrays as tags, nested objects as key-tags with `[n]` badge
+- **Click to copy** - click any cell value to copy to clipboard with toast notification
+- **Expandable modal** - view full JSON for any cell in a popup
 
 ### File Management
-- **Multiple file tabs** — load and switch between multiple JSON files
-- **Row count badges** — each tab shows its record count
-- **Remove with confirmation** — trash icon on each tab with a confirmation dialog
-- **All state persists** — filters, sorts, column widths, spreads, and visibility survive page reloads
+- **Multiple file tabs** - load and switch between multiple JSON files
+- **Row count badges** - each tab shows its record count
+- **Remove with confirmation** - trash icon on each tab with a confirmation dialog
+- **All state persists** - filters, sorts, column widths, spreads, and visibility survive page reloads
 
 ### Field Sidebar
-- **Toggle visibility** — show/hide individual columns
-- **Drag reorder** — rearrange columns via drag-and-drop
-- **Column stats** — unique count and empty count shown per field (`123u/45e`)
-- **Spread sub-items** — nested keys shown indented with remove buttons
+- **Toggle visibility** - show/hide individual columns
+- **Drag reorder** - rearrange columns via drag-and-drop
+- **Column stats** - unique count and empty count shown per field (`123u/45e`)
+- **Spread sub-items** - nested keys shown indented with remove buttons
 
 ### Search & Export
-- **Full-text search** — searches across all visible fields simultaneously
-- **Export filtered view** — download the currently filtered/sorted data as JSON
+- **Full-text search** - searches across all visible fields simultaneously
+- **Export filtered view** - download the currently filtered/sorted data as JSON
 
 ### Keyboard Shortcuts
 | Shortcut | Action |
@@ -45,17 +45,17 @@ A modern, snappy JSON Web Notebook for inspecting, filtering, and exploring JSON
 | `Ctrl+V` | Auto-detect and import JSON from clipboard |
 
 ### Theme
-- **Dark / Light mode** — toggle with smooth transitions
-- **Fully responsive** — adapts to mobile, tablet, and desktop
+- **Dark / Light mode** - toggle with smooth transitions
+- **Fully responsive** - adapts to mobile, tablet, and desktop
 
 ## Tech Stack
 
 - **React 19** + **Vite** + **TypeScript**
-- **Zustand** — state management with `localStorage` persistence and migrations
-- **@dnd-kit** — drag-and-drop for column reordering
-- **@tanstack/react-virtual** — virtualized table rendering
-- **Lucide React** — icon library
-- **Vanilla CSS** — custom variables for theming
+- **Zustand** - state management with `localStorage` persistence and migrations
+- **@dnd-kit** - drag-and-drop for column reordering
+- **@tanstack/react-virtual** - virtualized table rendering
+- **Lucide React** - icon library
+- **Vanilla CSS** - custom variables for theming
 
 ## Getting Started
 

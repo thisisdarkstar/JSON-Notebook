@@ -319,13 +319,12 @@
 }
 
 .virtual-cell {
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
   display: flex;
-  align-items: center;
-  min-height: 0;
+  align-items: flex-start;
   flex-shrink: 0;
 }
 
@@ -887,6 +886,7 @@
   gap: 3px;
   max-width: 100%;
   overflow: hidden;
+  align-items: center;
 }
 
 .cell-key-tag {
@@ -968,6 +968,7 @@
   gap: 3px;
   max-width: 100%;
   overflow: hidden;
+  align-items: center;
 }
 
 .cell-tag {

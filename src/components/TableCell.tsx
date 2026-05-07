@@ -32,7 +32,7 @@ export default function TableCell({
   field: string
 }) {
   if (value == null) {
-    return <span className="cell-null">—</span>
+    return <span className="cell-null">-</span>
   }
 
   if (typeof value === 'string') {
