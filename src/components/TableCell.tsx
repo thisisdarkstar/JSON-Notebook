@@ -1,6 +1,7 @@
 import Expandable from './Expandable'
 import SpreadButton from './SpreadButton'
 import { addToast } from './Toast'
+import { useStore } from '../store'
 import { isUrl } from '../utils/jsonParser'
 
 function countLabel(value: unknown): string {
@@ -24,6 +25,35 @@ function copyValue(value: unknown) {
   addToast('Copied to clipboard')
 }
 
+function HighlightText({ text, query }: { text: string; query: string }) {
+  if (!query) return <>{text}</>
+  const lower = text.toLowerCase()
+  const qlower = query.toLowerCase()
+  const parts: { start: number; end: number; match: boolean }[] = []
+  let i = 0
+  while (i < text.length) {
+    const idx = lower.indexOf(qlower, i)
+    if (idx === -1) {
+      parts.push({ start: i, end: text.length, match: false })
+      break
+    }
+    if (idx > i) parts.push({ start: i, end: idx, match: false })
+    parts.push({ start: idx, end: idx + query.length, match: true })
+    i = idx + query.length
+  }
+  return (
+    <>
+      {parts.map((p, pi) =>
+        p.match ? (
+          <mark key={pi} className="search-highlight">{text.slice(p.start, p.end)}</mark>
+        ) : (
+          <span key={pi}>{text.slice(p.start, p.end)}</span>
+        )
+      )}
+    </>
+  )
+}
+
 export default function TableCell({
   value,
   field,
@@ -31,8 +61,10 @@ export default function TableCell({
   value: unknown
   field: string
 }) {
+  const searchQuery = useStore((s) => s.searchQuery)
+
   if (value == null) {
-    return <span className="cell-null">-</span>
+    return <span className="cell-null">—</span>
   }
 
   if (typeof value === 'string') {
@@ -42,7 +74,7 @@ export default function TableCell({
     }
     return (
       <span className="cell-string" onClick={() => copyValue(value)} title="Click to copy" style={{ cursor: 'pointer' }}>
-        {value}
+        <HighlightText text={value} query={searchQuery} />
       </span>
     )
   }
@@ -50,7 +82,7 @@ export default function TableCell({
   if (typeof value === 'number') {
     return (
       <span className="cell-number" onClick={() => copyValue(value)} title="Click to copy" style={{ cursor: 'pointer' }}>
-        {value.toLocaleString()}
+        <HighlightText text={value.toLocaleString()} query={searchQuery} />
       </span>
     )
   }
@@ -73,7 +105,7 @@ export default function TableCell({
                   {String(v).replace(/^https?:\/\//, '').replace(/\/$/, '')}
                 </a>
               ) : (
-                String(v)
+                <HighlightText text={String(v)} query={searchQuery} />
               )}
             </span>
           ))}
@@ -87,7 +119,7 @@ export default function TableCell({
           <div className="cell-nested">
             <div className="cell-nested-keys">
               {keys.map((k) => (
-                <span key={k} className="cell-key-tag">{k}</span>
+                <span key={k} className="cell-key-tag"><HighlightText text={k} query={searchQuery} /></span>
               ))}
             </div>
             <div className="cell-nested-actions">
@@ -104,7 +136,7 @@ export default function TableCell({
       <div className="cell-tags">
         {value.map((v, i) => (
           <span key={i} className="cell-tag" onClick={() => copyValue(v)} title="Click to copy" style={{ cursor: 'pointer' }}>
-            {String(v)}
+            <HighlightText text={String(v)} query={searchQuery} />
           </span>
         ))}
       </div>
@@ -118,7 +150,7 @@ export default function TableCell({
         <div className="cell-nested">
           <div className="cell-nested-keys">
             {keys.map((k) => (
-              <span key={k} className="cell-key-tag">{k}</span>
+              <span key={k} className="cell-key-tag"><HighlightText text={k} query={searchQuery} /></span>
             ))}
           </div>
           <div className="cell-nested-actions">
@@ -132,5 +164,5 @@ export default function TableCell({
     )
   }
 
-  return <span onClick={() => copyValue(value)} title="Click to copy" style={{ cursor: 'pointer' }}>{String(value)}</span>
+  return <span onClick={() => copyValue(value)} title="Click to copy" style={{ cursor: 'pointer' }}><HighlightText text={String(value)} query={searchQuery} /></span>
 }
