@@ -4,6 +4,7 @@ import FileImport from './components/FileImport'
 import FieldSidebar from './components/FieldSidebar'
 import DataTable from './components/DataTable'
 import ThemeToggle from './components/ThemeToggle'
+import KeyboardShortcuts from './components/KeyboardShortcuts'
 import ToastProvider from './components/Toast'
 import './styles/components.css'
 
@@ -39,10 +40,11 @@ export default function App() {
   return (
     <ToastProvider>
       <div className="app-layout">
-        <div className="app-header">
-          <h1>JSON Notebook</h1>
-          <ThemeToggle />
-        </div>
+      <div className="app-header">
+        <h1>JSON Notebook</h1>
+        <KeyboardShortcuts />
+        <ThemeToggle />
+      </div>
         <FileImport />
         {activeFile && files[activeFile] && (
           <div className="app-body">
